@@ -17,6 +17,8 @@ if [ -z ${PHP_MAX_EXECUTION_ZIME+x} ]; then PHP_MAX_EXECUTION_ZIME=30; fi
 if [ -z ${RAINLOOP_ADMIN_LOGIN+x} ]; then RAINLOOP_ADMIN_LOGIN=admin; fi
 if [ -z ${RAINLOOP_ADMIN_PASSWORD+x} ]; then RAINLOOP_ADMIN_PASSWORD=12345; fi
 
+openssl req -subj '/CN=$APACHE_SERVER_NAME/O=My Company/C=US' -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
+
 sed "s/StartServers.*=.*/StartServers = $APACHE_MIN_CHILDS/g" -i /etc/apache2/mods-available/mpm_prefork.conf
 sed "s/MaxRequestWorkers.*=.*/MaxRequestWorkers = $APACHE_MAX_CHILDS/g" -i /etc/apache2/mods-available/mpm_prefork.conf
 sed "s/MinSpareServers.*=.*/MinSpareServers = $APACHE_MIN_CHILDS_SPARE/g" -i /etc/apache2/mods-available/mpm_prefork.conf

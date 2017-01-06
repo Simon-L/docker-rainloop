@@ -44,13 +44,16 @@ RUN rm -fr /var/www/html && wget -q http://repository.rainloop.net/v2/webmail/ra
 
 RUN cp /var/www/html/rainloop/v/*/index.php.root /var/www/html/index.php
 
+RUN mkdir /etc/ssl/certs && \
+  mkdir /etc/ssl/private && \
+
 ADD vhost.conf /etc/apache2/sites-available/000-default.conf
 
 VOLUME  ["/var/www/html/data"]
 
-EXPOSE 80
+EXPOSE 443
 
-HEALTHCHECK --interval=5m --timeout=3s CMD curl -I -s -f http://localhost:80/ || exit 1
+HEALTHCHECK --interval=5m --timeout=3s CMD curl -I -s -f https://localhost:443/ || exit 1
 
 ADD run.sh /run.sh
 RUN chmod +x /*.sh
