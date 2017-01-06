@@ -46,6 +46,7 @@ RUN cp /var/www/html/rainloop/v/*/index.php.root /var/www/html/index.php
 
 # RUN mkdir /etc/ssl/certs && \
 #   mkdir /etc/ssl/private && \
+RUN a2enmod ssl
 
 ADD vhost.conf /etc/apache2/sites-available/000-default.conf
 
