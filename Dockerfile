@@ -44,8 +44,8 @@ RUN rm -fr /var/www/html && wget -q http://repository.rainloop.net/v2/webmail/ra
 
 RUN cp /var/www/html/rainloop/v/*/index.php.root /var/www/html/index.php
 
-RUN mkdir /etc/ssl/certs && \
-  mkdir /etc/ssl/private && \
+# RUN mkdir /etc/ssl/certs && \
+#   mkdir /etc/ssl/private && \
 
 ADD vhost.conf /etc/apache2/sites-available/000-default.conf
 
